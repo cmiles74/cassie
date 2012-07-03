@@ -174,6 +174,17 @@ matching rows and which hosts responded.
     [{:execution-time-micro 10830, :execution-time-nano 10830000,
 	  :host-used #<CassandraHost 33.33.33.10(33.33.33.10):9160>}]
 
+Testing
+-------
+
+When the unit tests for this project are run, they need a Cassandra
+instance to run against. This project comes with a
+[Vagrant](http://vagrantup.com/) definition file and a set of Chef
+recipes that can be used to create a virtual machine that can be used
+for these tests or for development. Check out the
+[Vagrant](http://vagrantup.com/) website for more information on this
+tool.
+
 Future Direction
 ----------------
 
