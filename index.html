@@ -1,0 +1,597 @@
+<html>
+  <head>
+    <title>com.tnrglobal.cassie.core - cassie API documentation</title>
+    <link href="static/favicon.png" rel="icon" />
+    <link href="static/favicon.png" rel="shortcut icon" />
+    <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/wiki.css" rel="stylesheet" />
+    <link media="all" type="text/css" href="static/internal.css" rel="stylesheet" />
+    <style>.menuWrapper{height: 36px;}</style>
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" href="http://www.wikispaces.com/_/2009051601/s/internal_ie.css" type="text/css" />
+    <![endif]-->
+  </head>
+<!--
+This document was auto-generated from the source by the clojure autodoc system.
+To report errors or ask questions about the overall documentation structure, formatting,
+etc., contact Tom Faulhaber (google mail name: tomfaulhaber).
+For errors in the documentation of a particular namespace, contact the author of that
+namespace.
+-->
+  <body>
+    <div id="AllContentContainer">
+      <div id="Header">
+	<a id="Logo" href="index.html"><img alt="Clojure" height="100" width="100" src="static/clojure-icon.gif" /></a>
+	<h1><a title="page header title" id="page-header" href="index.html">cassie</a></h1>
+      </div>
+      <div id="leftcolumn"><div style="text-align: center;"></div>
+<div class="menu">
+  <div class="WikiCustomNav WikiElement wiki">
+    <span class="toc-header"><span id="project-name">cassie</span> <span id="version"></span> API</span><br />
+    <ul>
+      <li><a class="wiki_link" href="index.html">Overview</a></li>
+      <li><a class="wiki_link" href="api-index.html">API Index</a></li>
+    </ul>
+    
+    
+    <a href="http://clojure.org" class="wiki_link">Clojure Home</a>
+  </div>
+</div>
+</div>
+      <div id="rightcolumn">
+	<div id="Content">
+	  <div class="contentBox"><div class="innerContentBox">
+              <div id="content_view" class="wiki wikiPage">
+                <div id="right-sidebar"><div id="toc">
+  <h1 class="nopad">Table of Contents</h1>
+  <div style="margin-left: 1em;" class="toc-section">
+    <a href="#toc0">Overview</a>
+    <div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/cluster">cluster</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/column-families-def">column-families-def</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/column-family-def">column-family-def</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/column-family-template">column-family-template</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/configurator">configurator</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/create-keyspace">create-keyspace</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/delete-column-family-template">delete-column-family-template</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/describe-keyspace">describe-keyspace</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/drop-keyspace">drop-keyspace</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/index-query">index-query</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/index-query-delete">index-query-delete</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/key-for-column-name">key-for-column-name</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/key-serializer-for-column">key-serializer-for-column</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/keyspace">keyspace</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/keyspace-def">keyspace-def</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/keyspace-exists?">keyspace-exists?</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/mapper">mapper</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/mutator-result-map">mutator-result-map</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/name-serializer-for-column">name-serializer-for-column</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/read-column-family-template">read-column-family-template</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/serializer-for-column">serializer-for-column</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/template">template</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/update-column-family-template">update-column-family-template</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/with-cluster">with-cluster</a>
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a href="#com.tnrglobal.cassie.core/with-keyspace">with-keyspace</a>
+    </div>
+    <br />
+  </div>
+</div>
+</div>
+                <div id="content-tag"><h1 id="overview">API for <span id="namespace-name">com.tnrglobal.cassie.core</span>
+  - <span id="header-project">cassie</span> <span id="header-version"></span>
+  </h1>
+
+<br />Full namespace name: <span id="long-name">com.tnrglobal.cassie.core</span>
+<p></p>
+<h2>Overview</h2>
+<pre id="namespace-docstr">Provides functions that make it easier to work with the
+Cassandra Hector Java API.</pre>
+
+
+<br />
+<h2>Public Variables and Functions</h2>
+<div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/cluster">cluster</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (cluster name)
+       (cluster name hosts &amp; {:keys [port auto-discover], :or {port 9160, auto-discover true}})
+</pre>
+  <pre id="var-docstr">Returns Cluster instance connected to the named cluster on the
+provided sequence of hosts; if no hosts are provided then
+'localhost' is assumed. You may set optional values with the
+provided keys:
+
+  :port Cassandra RPC port, 9160
+  :auto-discover Discover hosts via Thrift, true
+
+Once you have a handle on your cluster, you can use
+the (with-cluster ...) form to pass it to the other functions that
+need it.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/column-families-def">column-families-def</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (column-families-def keyspace-name families)
+</pre>
+  <pre id="var-docstr">Returns sequence of column family definitions for the provided
+keyspace name. You should provide a sequence, each item containing
+the name and comparator for the column family. The comparator should
+either be a key into the 'comparators' map or an Object that
+implements the Comparator interface.
+
+  (column-families 'Blog' [['articles' :utf8]
+                           ['comments' :utf8]])</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/column-family-def">column-family-def</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (column-family-def keyspace-name name comparator)
+</pre>
+  <pre id="var-docstr">Returns a new column family with the specified name for the
+provided keyspace name.  The provided comparator is used to sort
+colums in a row, use the 'comparators' map to get the one that you
+need.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/column-family-template">column-family-template</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (column-family-template column-family key-serializer top-serializer)
+</pre>
+  <pre id="var-docstr">Creates a column family template for the provided column family in
+the keyspace. The 'key-serializer' is used to serialize the incoming
+keys of new items, the 'top-serializer' is used to serialize the
+name incoming column names of items; both should be either a key
+from the 'serializers' map or an Object that implements the
+Serializer interface. This function should be called in the context
+of a (with-keyspace ...) form.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/configurator">configurator</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (configurator hosts &amp; {:keys [port auto-discover], :or {port 9160, auto-discover true}})
+</pre>
+  <pre id="var-docstr">Returns a CassandraHostConfigurator instance set to use the
+specified sequence of hosts. You may set optional values with the
+provided keys:
+
+  :port Cassandra RPC port, 9160
+  :auto-discover Discover hosts via Thrift, true
+
+You likely won't be using this function directly, instead you'll use
+the 'cluster' function.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/create-keyspace">create-keyspace</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (create-keyspace keyspace-name families columns &amp; {:keys [block replication strategy], :or {block true, replication 1, strategy ThriftKsDef/DEF_STRATEGY_CLASS}})
+</pre>
+  <pre id="var-docstr">Creates a new keyspace with the specified name on the provided
+cluster and creates the provided columns. The 'cluster' should be an
+value returned by the 'cluster' function, 'families' should be a
+sequence hash of column family definitions. The 'columns' should be
+a map of column symbols, family names, column names, and
+serializers (see the 'template' function for more details). This
+function should be called in the context of a (with-cluster ...)
+form.
+
+  (create-keyspace my-cluster
+                   'Blog'
+                   [['articles' :utf8]['comments' :utf8]]
+                   {:post-date ['articles' 'postDate' :string :string :long]})
+
+You may set option values with the provided keys:
+
+  :block Block until keyspace created, true</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/delete-column-family-template">delete-column-family-template</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (delete-column-family-template col-fam-template column-name id)
+</pre>
+  <pre id="var-docstr">Uses the provided column family template to delete the specified
+column for the provided id.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/describe-keyspace">describe-keyspace</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (describe-keyspace keyspace-name)
+</pre>
+  <pre id="var-docstr">Returns a map that wraps a JavaBean describing the specified
+keyspace or nil if that keyspace does not exists. This function
+should be called in the context of a (with-cluster ...) form.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/drop-keyspace">drop-keyspace</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (drop-keyspace keyspace-name &amp; {:keys [block], :or {block true}})
+</pre>
+  <pre id="var-docstr">Drops the specified keyspace from the cluster.
+
+The behvavior of this function may be customized with the following
+keys.
+
+  :block blocks until delete is complete, true</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/index-query">index-query</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (index-query column-defs family constraints &amp; {:keys [id-key columns return-keys-only range row-count start-key], :or {id-key :id, columns nil, return-keys-only false, range nil, row-count 11, start-key }})
+</pre>
+  <pre id="var-docstr">Returns a sequence of results that match the provided query
+ constraints. The "family" is the name of the column family
+ containing the secondary index.
+
+ The query shound be a sequence of sequences, each defines a portion
+ of the query. The first item in the query sequence will be a key
+ representing the criteria (:equals,
+ :greater-than, :less-than) the next item will be the key for the
+ column and the last item the column value.
+
+  [[:equals :last-name "Miles"]
+   [:equals :city "Easthampton"]]
+
+You may provide a list of columns to be returned from the column
+family holding the index with the "columns" parameter. If
+"columns" is set to nil then all columns in the family will be
+returned.
+
+The results will be returned as a sequence, eache item in the
+sequence will contain a row key followed by a map of the column data
+for that row. This map will also come wrapped with metadata, this
+metadata will have the value map keys for it's keys and a map of
+information about the values (i.e. :clock, :name-serializer, :ttl,
+etc.)
+
+  [["19292xx" {:name "Mike" :age 42}]
+   ["18273cs" {:name "Jore" :age 38}]]
+
+The behavior of this function may be customized by providing the
+following keys.
+
+  :id-key The field in the column definition with the unique row id, :id
+  :columns Columns in the family to return, all
+  :return-keys-only returns only keys, no other data; false
+  :range set a range of columns to retrieve, this should be expressed
+    as a map with the following keys: :start, :finish, :reversed,
+    :count). Note that if you set a range of columns, you can leave
+    the "columns" parameter nil.
+  :row-count number of rows to return; 11
+  :start-key the key used to start returning rows</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/index-query-delete">index-query-delete</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (index-query-delete column-defs family constraints &amp; {:keys [id-key row-count start-key], :or {id-key :id, row-count 11, start-key nil}})
+</pre>
+  <pre id="var-docstr">Deletes all rows matching an index query. This function will delete
+all of the items in batches according to the given
+"row-count". See the usage of "index-query" for information on
+how this query should be constructed, note that we don't accept a
+list of columns here as we will be deleting them all.
+
+This function will execute a query and then page through the
+results, deleting the returned rows. Depending on how big your data
+set is, this could take a while.
+
+The "family" value may be either the name of a family or a
+sequence of family names. If a sequence is provided, the first
+family name is the one on which the index-query is run against. The
+rows retrieved will subsequently be removed from all of the family
+names in the sequence. This is meant to support a case where one
+family contains the constraint columns and the other families
+contain related data.
+
+This behavior of this function may be customized with the following
+keys.
+
+  :id-key The field in the column definition with the unique row id, :id
+  :row-count The number of rows to fetch per batch, 11
+  :start-key The key the rows will start from, nil</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/key-for-column-name">key-for-column-name</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (key-for-column-name column-defs family column-name)
+</pre>
+  <pre id="var-docstr">Returns the keyname for the provided column name.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/key-serializer-for-column">key-serializer-for-column</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (key-serializer-for-column column-defs family column-name)
+</pre>
+  <pre id="var-docstr">Returns the key serializer key for the specified column family and
+name from the provided column definition map.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/keyspace">keyspace</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (keyspace keyspace-name &amp; {:keys [consistency failover retry-sleep], :or {failover (:try-all failover), consistency (:all-one consistency), retry-sleep 0}})
+</pre>
+  <pre id="var-docstr">Returns a Keyspace instance for the specified keyspace name on the
+provided cluster. This function should be called in the context of
+a (with-cluster ...) form. You may set option values with the
+provided keys:
+
+  :consistency Consistency level for read and writes, all-one
+  :failover Failover strategy, try-all with 1 retry and no sleep</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/keyspace-def">keyspace-def</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (keyspace-def keyspace-name column-families &amp; {:keys [replication strategy], :or {replication 1, strategy ThriftKsDef/DEF_STRATEGY_CLASS}})
+</pre>
+  <pre id="var-docstr">Returns a new keyspace definition with the provided name and column
+families. You may set optional values with the provided keys:
+
+  :replication Replicaiton factor, 1
+  :strategy Replication strategy, ThriftKsDef/DEF_STRATEGY_CLASS</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/keyspace-exists?">keyspace-exists?</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (keyspace-exists? keyspace-name)
+</pre>
+  <pre id="var-docstr">Returns true if a keyspace with the provided name exists in the
+provided cluster. This function should be called in the context of
+a (with-cluster ...) form.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/mapper">mapper</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (mapper templ id-or-map &amp; {:keys [id-key delete columns], :or {id-key :id, delete false}})
+</pre>
+  <pre id="var-docstr">Either stores or retrieves data from Cassandra using the provided
+template. If a map of data is supplied, that data is inserted into
+Cassandra; note that the keys on the provided map need to math the
+keys in the map definition that were used to create the supplied
+template. If an id is provided, each reader in the template will be
+invoked for the provided id and the results will be assembled into a
+map of data. Note that there are no nil values in Cassandra, if
+there isn't a value for column family, column name, id combination
+then that key will not be present in the result map.
+
+Since there are no nil values in Cassandra, providing a map with a
+key that has a value of nil will cause that row's column for that
+value to be deleted.
+
+You may set option values with the provided keys:
+
+  :id-key Field in the map containing the unique id, :id
+  :delete Indicates rows with the given id should be removed, false
+  :columns Sequence of columns to delete or retrieve, all columns</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/mutator-result-map">mutator-result-map</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (mutator-result-map result)
+</pre>
+  <pre id="var-docstr">Returns a map of data for the provided mutator result.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/name-serializer-for-column">name-serializer-for-column</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (name-serializer-for-column column-defs family column-name)
+</pre>
+  <pre id="var-docstr">Returns the name serializer key for the specified column family and
+name from the provided column definition map.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/read-column-family-template">read-column-family-template</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (read-column-family-template col-fam-template column-name serializer id)
+</pre>
+  <pre id="var-docstr">Uses the provided column family template to read the specified
+column for the provided id and return's that value. The 'serializer'
+value should either be a key from the 'serializers' map or an Object
+that implements the Serializer interface; this is used to
+de-serialize the value read into a byte array.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/serializer-for-column">serializer-for-column</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (serializer-for-column column-defs family column-name)
+</pre>
+  <pre id="var-docstr">Returns the serializer key for the specified column family and name
+from the provided column definition map.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/template">template</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (template map-in)
+</pre>
+  <pre id="var-docstr">Accepts a map that defines how data should be stored and returns a
+map of templates and updater, reader and delete functions. This
+function should be called in the context of a (with-keyspace ...)
+form. You may then use the reader and updater functions from this
+map to read and write data. Here's an example specification map:
+
+  {:posted_date ['meta'    'postedDate' :string :string :long]
+   :title       ['article' 'title'      :string :string :string]
+   :content     ['article' 'content'    :string :string :string]}
+
+The returned map will have three keys, :templates, :updaters
+and :readers. You can update a value like so:
+
+  ((:title (:updaters template)) '1jk123jk23' 'Awesome Article')
+
+To retrieve a value, you can do something like this:
+
+  ((:title (:readers template)) '1jk123jk23')
+
+Or to delete a value:
+
+  ((:title (:deleters template)) '1jk123jk23')</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/update-column-family-template">update-column-family-template</h2>
+  <span id="var-type">function</span><br />
+  <pre id="var-usage">Usage: (update-column-family-template col-fam-template column-name serializer id value)
+</pre>
+  <pre id="var-docstr">Uses the provided column family template to update the specified
+column for the provided id with the supplied value. The 'serializer'
+value should either be a key from the 'serializers' map or an Object
+that implements the Serializer interface; this is used to serialize
+the provided value to a byte array.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/with-cluster">with-cluster</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (with-cluster cluster &amp; body)
+</pre>
+  <pre id="var-docstr">Evaluates the provided forms in the context of the provided cluster
+instance. You want to surround any calls that require a cluster
+instance with this form.</pre>
+  
+  
+  
+</div><div id="var-entry">
+  <br />
+  <hr />
+  <h2 id="com.tnrglobal.cassie.core/with-keyspace">with-keyspace</h2>
+  <span id="var-type">macro</span><br />
+  <pre id="var-usage">Usage: (with-keyspace keyspace &amp; body)
+</pre>
+  <pre id="var-docstr">Evaluates the provided forms in the context of the provided
+keyspace instance. You want to surround any calls that require a
+keyspace instance with this form.</pre>
+  
+  
+  
+</div>
+
+
+</div>
+              </div>
+            </div>
+          </div>
+	</div>
+	<div id="foot">
+	  <div style="text-align: center;" id="copyright">No copyright info </div>
+	</div>
+      </div>
+      <div id="DesignedBy">Logo &amp; site design by <a title="Visit Tom Hickey's website." href="http://www.tomhickey.com">Tom Hickey</a>.<br />
+      Clojure auto-documentation system by Tom Faulhaber.</div>
+    </div>
+    <!-- /AllContentContainer -->
+  </body>
+
+</html>
