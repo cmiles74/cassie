@@ -12,6 +12,9 @@ Cassie builds on the [Hector](http://wiki.apache.org/cassandra/Hector)
 library. If you find there's functionality that you need that is
 missing in Cassie, it is surely available through Hector.
 
+API documentation for this library
+[is also available](http://cmiles74.github.com/cassie/).
+
 Installation
 ------------
 
