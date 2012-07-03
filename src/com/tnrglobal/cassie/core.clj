@@ -1,7 +1,9 @@
 ;;
 ;; Functions for interacting with Cassandra.
 ;;
-(ns com.tnrglobal.cassie.core
+(ns ^{:doc "Provides functions that make it easier to work with the
+            Cassandra Hector Java API."}
+  com.tnrglobal.cassie.core
   (:import [java.util Arrays]
            [me.prettyprint.hector.api.factory HFactory]
            [me.prettyprint.cassandra.service CassandraHostConfigurator]
