@@ -1,0 +1,11 @@
+# cluster nodes
+nodes: ['33.33.33.10'] #, '33.33.33.11', '33.33.33.12']
+
+# cluster interface
+interface: '33.33.33.*'
+
+# cassandra cluster name
+cassandra_name: "Test"
+
+# cassandra keyspace
+cassandra_keyspace: "Test"

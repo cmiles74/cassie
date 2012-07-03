@@ -1,0 +1,16 @@
+lib
+build
+classes
+*.jar
+.cake
+pom.xml
+docs
+#*#
+#*
+*#
+*~
+.lein-*
+*.log
+autodoc
+data
+target
