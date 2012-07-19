@@ -23,7 +23,7 @@ To use Cassie within your project, add the following to the
 [Leiningen](https://github.com/technomancy/leiningen/) definition
 ("project.clj").
 
-    [tnrglobal/cassie "0.5"]
+    [tnrglobal/cassie "0.6"]
 
 Using the Library
 -----------------
