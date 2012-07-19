@@ -1,4 +1,4 @@
-(defproject tnrglobal/cassie "0.5"
+(defproject tnrglobal/cassie "0.6"
   :description "A library for working with Apache Cassandra"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [org.hectorclient/hector-core "1.1-0"]]

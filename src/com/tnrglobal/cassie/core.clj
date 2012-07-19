@@ -576,16 +576,26 @@
   family contains the constraint columns and the other families
   contain related data.
 
+  You may also provide a callback handler function in order to receive
+  updates on the status of the deleting. This function should accept
+  the following parameters.
+
+    rows-processed The number of rows processed in this batch
+    keys A sequence of keys processed in this batch
+    next-key The row key used to find the start of the next batch to process
+
+  The callback function isn't executed in another thread.
+
   This behavior of this function may be customized with the following
   keys.
 
     :id-key The field in the column definition with the unique row id, :id
-    :row-count The number of rows to fetch per batch, 11
-    :start-key The key the rows will start from, nil"
-  [column-defs family constraints & {:keys [id-key row-count start-key]
-                                     :or {id-key :id
-                                          row-count 11
-                                          start-key nil}}]
+    :row-count The number of rows to fetch per batch; 11
+    :start-key The key the rows will start from; nil
+    :callback-fn  Function to handle update callbacks, nil"
+  [column-defs family constraints
+   & {:keys [id-key row-count start-key callback-fn]
+      :or {id-key :id  row-count 10  start-key nil callback-fn nil}}]
 
   (loop [result []
          start-key nil]
@@ -598,15 +608,17 @@
                             constraints
                             :id-key id-key
                             :return-keys-only true
-                            :start-key start-key)
-          keys-in (map first rows)]
+                            :start-key start-key
+                            :row-count (inc row-count))
+          keys-in (take row-count (map first rows))
+          next-key (if (< row-count) (first (last rows)))]
 
       ;; create a mutator to handle our deletes
       (let [mutator (HFactory/createMutator *KEYSPACE*
                                             ((serializers key-ser))
                                             (BatchSizeHint. (dec row-count) 0))]
 
-        ;; delete the row for each family
+        ;; setup to delete the row for each family
         (dorun (for [family-this (if (coll? family) family [family])]
                  (.addDeletion mutator
                                keys-in
@@ -614,14 +626,28 @@
 
         (cond
 
-          ;; delete this batch and recur for the next batch
-          (< (dec row-count) (count rows))
-          (recur (conj result (mutator-result-map (.execute mutator)))
-                 (:key (last rows)))
+          ;; this isn't our last batch
+          next-key
+          (let [result-this (mutator-result-map (.execute mutator))]
+
+            ;; invoke the callback function with our status
+            (if callback-fn
+              (callback-fn (count keys-in) keys-in next-key))
+
+            ;; delete this batch, recur for the next
+            (recur (conj result result-this)
+                   next-key))
 
           ;; delete this batch and return our results
           :else
-          (conj result (mutator-result-map (.execute mutator))))))))
+          (let [result-this (mutator-result-map (.execute mutator))]
+
+            ;; invoke the callback function with our status
+            (if callback-fn
+              (callback-fn (count keys-in) keys-in next-key))
+
+            ;; delete the last batch
+            (conj result result-this)))))))
 
 (defn template
   "Accepts a map that defines how data should be stored and returns a

@@ -140,7 +140,7 @@
     (with-test-data
       (let [result (cassie/index-query COLUMN-DEFS
                                        "customers"
-                                       [[:equals "city" "Easthampton"]]
+                                       [[:equals :city "Easthampton"]]
                                        :id-key :ssn)]
 
         (is (= 2 (count result))
@@ -148,13 +148,19 @@
 
   (testing "Index Query Delete"
     (with-test-data
-      (let [delete (cassie/index-query-delete COLUMN-DEFS
+      (let [callback (fn [r ks k]
+                       (println "Rows Deleted" r)
+                       (println "Keys Deleted" ks)
+                       (println "Next Key" k))
+            delete (cassie/index-query-delete COLUMN-DEFS
                                               "customers"
-                                              [[:equals "city" "Easthampton"]]
-                                              :id-key :ssn)
+                                              [[:equals :city "Easthampton"]]
+                                              :id-key :ssn
+                                              :row-count 1
+                                              :callback-fn callback)
             result (cassie/index-query COLUMN-DEFS
                                        "customers"
-                                       [[:equals "city" "Easthampton"]]
+                                       [[:equals :city "Easthampton"]]
                                        :id-key :ssn)]
         (is (= 0 (count result))))))
 
@@ -166,7 +172,7 @@
                                   :delete true)
             result (cassie/index-query COLUMN-DEFS
                                        "customers"
-                                       [[:equals "city" "Easthampton"]]
+                                       [[:equals :city "Easthampton"]]
                                        :id-key :ssn)]
         (is (= 1 (count result))))))
 
