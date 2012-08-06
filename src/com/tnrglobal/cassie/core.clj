@@ -556,6 +556,23 @@
    :execution-time-nano (.getExecutionTimeNano result)
    :host-used (.getHostUsed result)})
 
+(defn bulk-delete
+  "Deletes the rows with the provided identifiers fromthe specified
+  column families."
+  [column-defs family ids & {:keys [id-key] :or {id-key :id}}]
+
+  ;; create a mutator to handle our deletes
+  (let [key-ser (nth (column-defs id-key) 2)
+        mutator (HFactory/createMutator *KEYSPACE*
+                                        ((serializers key-ser))
+                                        (BatchSizeHint. (count ids) 0))]
+
+    ;; setup to delete the row
+    (dorun (for [family-this (if (coll? family) family [family])]
+             (.addDeletion mutator ids family-this)))
+
+    ;; execute the delete
+    (mutator-result-map (.execute mutator))))
 
 (defn index-query-delete
   "Deletes all rows matching an index query. This function will delete
@@ -614,21 +631,13 @@
           next-key (if (< row-count) (first (last rows)))]
 
       ;; create a mutator to handle our deletes
-      (let [mutator (HFactory/createMutator *KEYSPACE*
-                                            ((serializers key-ser))
-                                            (BatchSizeHint. (dec row-count) 0))]
-
-        ;; setup to delete the row for each family
-        (dorun (for [family-this (if (coll? family) family [family])]
-                 (.addDeletion mutator
-                               keys-in
-                               family-this)))
+      (let [result-this (bulk-delete column-defs family keys-in :id-key id-key)]
 
         (cond
 
           ;; this isn't our last batch
           next-key
-          (let [result-this (mutator-result-map (.execute mutator))]
+          (do
 
             ;; invoke the callback function with our status
             (if callback-fn
@@ -640,14 +649,14 @@
 
           ;; delete this batch and return our results
           :else
-          (let [result-this (mutator-result-map (.execute mutator))]
+          (do
 
-            ;; invoke the callback function with our status
-            (if callback-fn
-              (callback-fn (count keys-in) keys-in next-key))
+           ;; invoke the callback function with our status
+           (if callback-fn
+             (callback-fn (count keys-in) keys-in next-key))
 
-            ;; delete the last batch
-            (conj result result-this)))))))
+           ;; delete the last batch
+           (conj result result-this)))))))
 
 (defn template
   "Accepts a map that defines how data should be stored and returns a
